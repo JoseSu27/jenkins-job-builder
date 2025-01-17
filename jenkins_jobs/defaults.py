@@ -117,6 +117,8 @@ view_contents_keys = {
     "allow-manual-triggers",
     "allow-pipeline-start",
     "allow-rebuild",
+    "embedded-css",
+    "full-screen-css",
     "link-relative",
     "link-to-console-log",
     "max-number-of-visible-pipelines",

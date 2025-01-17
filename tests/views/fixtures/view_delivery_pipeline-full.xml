@@ -8,6 +8,8 @@
   <allowManualTriggers>true</allowManualTriggers>
   <allowPipelineStart>true</allowPipelineStart>
   <allowRebuild>true</allowRebuild>
+  <embeddedCss>foo</embeddedCss>
+  <fullScreenCss>bar</fullScreenCss>
   <linkRelative>false</linkRelative>
   <linkToConsoleLog>true</linkToConsoleLog>
   <maxNumberOfVisiblePipelines>-1</maxNumberOfVisiblePipelines>
