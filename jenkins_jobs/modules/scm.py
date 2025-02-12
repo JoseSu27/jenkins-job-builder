@@ -260,8 +260,14 @@ def git(registry, xml_parent, data):
             * **branch** (`string`) - name of the branch to create changelog
               against (default 'master')
         * **choosing-strategy**: (`string`) - Jenkins class for selecting what
-            to build. Can be one of `default`,`inverse`, or `gerrit`
+            to build. Can be one of `default`,`inverse`, `gerrit`, or `ancestry`
             (default 'default')
+        * **maximum-age** (`int`) - Maximum age, in days, of commits to examine
+            for build (when choosing-strategy=ancestry)
+            (default: none)
+        * **ancestor-sha1** (`string`) - If set, only branches including this
+            commit will be built (when choosing-strategy=ancestry)
+            (default: none)
         * **clean** (`dict`)
             * **after** (`dict`) - Clean the workspace after checkout
                 * **remove-stale-nested-repos** (`bool`) - Deletes untracked
@@ -489,6 +495,7 @@ def git_extensions(xml_parent, data):
             "gerrit.trigger.hudsontrigger.GerritTriggerBuildChooser"
         ),
         "inverse": "hudson.plugins.git.util.InverseBuildChooser",
+        "ancestry": "hudson.plugins.git.util.AncestryBuildChooser",
     }
 
     if not trait and "basedir" in data:
@@ -509,8 +516,17 @@ def git_extensions(xml_parent, data):
             raise ValueError(
                 "Invalid choosing-strategy %r" % data.get("choosing-strategy")
             )
+
         ext = XML.SubElement(xml_parent, impl_prefix + "BuildChooserSetting")
-        XML.SubElement(ext, "buildChooser", {"class": choosing_strategy})
+        chooser = XML.SubElement(ext, "buildChooser", {"class": choosing_strategy})
+        if choosing_strategy == choosing_strategies["ancestry"]:
+            maximum_age = data.get("maximum-age", None)
+            ancestor_sha1 = data.get("ancestor-sha1", None)
+            if maximum_age:
+                XML.SubElement(chooser, "maximumAgeInDays").text = str(maximum_age)
+            if ancestor_sha1:
+                XML.SubElement(chooser, "ancestorCommitSha1").text = ancestor_sha1
+
     if "clean" in data:
         # Keep support for old format 'clean' configuration by checking
         # if 'clean' is boolean. Else we're using the new extensions style.
