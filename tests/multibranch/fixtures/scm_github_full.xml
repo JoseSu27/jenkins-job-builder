@@ -178,6 +178,11 @@
                 <commentBody>Ci build!</commentBody>
                 <allowUntrusted>true</allowUntrusted>
               </com.adobe.jenkins.github__pr__comment__build.TriggerPRCommentBranchProperty>
+              <com.adobe.jenkins.github__pr__comment__build.TriggerPRLabelBranchProperty plugin="github-pr-comment-build">
+                <label>some label</label>
+                <allowUntrusted>false</allowUntrusted>
+                <minimumPermissions>WRITE</minimumPermissions>
+              </com.adobe.jenkins.github__pr__comment__build.TriggerPRLabelBranchProperty>
               <com.adobe.jenkins.github__pr__comment__build.TriggerPRReviewBranchProperty plugin="github-pr-comment-build">
                 <allowUntrusted>true</allowUntrusted>
               </com.adobe.jenkins.github__pr__comment__build.TriggerPRReviewBranchProperty>
