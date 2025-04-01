@@ -307,6 +307,7 @@ def git(registry, xml_parent, data):
         * **per-build-tag** (`bool`) - Create a tag in the workspace for every
             build. (default is inverse of skip-tag if set, otherwise false)
         * **prune** (`bool`) - Prune remote branches (default false)
+        * **prune-tags** (`bool`) - Prune tags if they no longer exist on the remote (default false)
         * **scm-name** (`string`) - The unique scm name for this Git SCM
             (optional)
         * **shallow-clone** (`bool`) - Perform shallow clone (default false)
@@ -759,6 +760,15 @@ def git_extensions(xml_parent, data):
         ext_name = impl_prefix + "PruneStaleBranch"
         if trait:
             trait_name = "PruneStaleBranchTrait"
+            tr = XML.SubElement(xml_parent, trait_prefix + trait_name)
+            ext = XML.SubElement(tr, "extension", {"class": ext_name})
+        else:
+            ext = XML.SubElement(xml_parent, ext_name)
+    prune = str(data.get("prune-tags", False)).lower()
+    if prune == "true":
+        ext_name = impl_prefix + "PruneStaleTag"
+        if trait:
+            trait_name = "PruneStaleTagTrait"
             tr = XML.SubElement(xml_parent, trait_prefix + trait_name)
             ext = XML.SubElement(tr, "extension", {"class": ext_name})
         else:

@@ -110,6 +110,9 @@
             <jenkins.plugins.git.traits.PruneStaleBranchTrait>
               <extension class="hudson.plugins.git.extensions.impl.PruneStaleBranch"/>
             </jenkins.plugins.git.traits.PruneStaleBranchTrait>
+            <jenkins.plugins.git.traits.PruneStaleTagTrait>
+              <extension class="hudson.plugins.git.extensions.impl.PruneStaleTag"/>
+            </jenkins.plugins.git.traits.PruneStaleTagTrait>
             <jenkins.plugins.git.traits.WipeWorkspaceTrait>
               <extension class="hudson.plugins.git.extensions.impl.WipeWorkspace"/>
             </jenkins.plugins.git.traits.WipeWorkspaceTrait>
