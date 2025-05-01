@@ -104,6 +104,9 @@ view_contents_keys = {
     "columns",
     "regex",
     "recurse",
+    # Categorized.
+    "regex_to_ignore_on_color_computing",
+    "categorization_criteria",
     # Sectioned.
     "sections",
     # SectionedText.
