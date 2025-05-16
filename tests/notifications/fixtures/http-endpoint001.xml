@@ -9,8 +9,13 @@
           <event>all</event>
           <timeout>30000</timeout>
           <retries>0</retries>
-          <url>http://example.com/jenkins_endpoint</url>
           <loglines>0</loglines>
+          <buildNotes/>
+          <branch>.*</branch>
+          <urlInfo>
+            <urlOrId>http://example.com/jenkins_endpoint</urlOrId>
+            <urlType>PUBLIC</urlType>
+          </urlInfo>
         </com.tikal.hudson.plugins.notification.Endpoint>
       </endpoints>
     </com.tikal.hudson.plugins.notification.HudsonNotificationProperty>
