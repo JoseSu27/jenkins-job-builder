@@ -55,6 +55,12 @@
       <groovyString>return [one,two,three]</groovyString>
       <computedValues/>
     </org.jenkinsci.plugins.GroovyAxis>
+    <org.jenkinsci.plugins.elasticaxisplugin.ElasticAxis>
+      <name>nodes</name>
+      <label>workers</label>
+      <ignoreOffline>false</ignoreOffline>
+      <dontExpandLabels>true</dontExpandLabels>
+    </org.jenkinsci.plugins.elasticaxisplugin.ElasticAxis>
   </axes>
   <actions/>
   <description>&lt;!-- Managed by Jenkins Job Builder --&gt;</description>
