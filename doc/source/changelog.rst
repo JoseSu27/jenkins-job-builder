@@ -1,6 +1,28 @@
 Changelog
 ==========
 
+Release 6.4.3
+-------------
+
+General changes
+~~~~~~~~~~~~~~~
+
+* Remove Python 3.7 checks from zuul jobs.
+
+Features added
+~~~~~~~~~~~~~~
+
+* Add REST List Parameter plugin support with test.
+* Add ElasticAxis support.
+* Added discard-old-build plugin.
+* Add support for item-based security provided by ownership plugin.
+* Add support for updated Notification plugin (branch support was added in notification 1.17).
+* Add categorized views.
+* Add support for "prune-tags" in git scm.
+* Add support for build trigger using PR label.
+* scm: add support for hudson.plugins.git.util.AncestryBuildChooser.
+* Update "Delivery Pipeline View" to accept 2 additional parameters,  "embedded-css" and "full-screen-css".
+
 Release 6.4.2
 -------------
 
