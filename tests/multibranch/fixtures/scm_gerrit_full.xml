@@ -135,6 +135,7 @@
             <strategies>
               <jenkins.branch.buildstrategies.basic.ChangeRequestBuildStrategyImpl plugin="basic-branch-build-strategies">
                 <ignoreTargetOnlyChanges>false</ignoreTargetOnlyChanges>
+                <ignoreUntrustedChanges>false</ignoreUntrustedChanges>
               </jenkins.branch.buildstrategies.basic.ChangeRequestBuildStrategyImpl>
               <jenkins.branch.buildstrategies.basic.TagBuildStrategyImpl plugin="basic-branch-build-strategies">
                 <atLeastMillis>-1</atLeastMillis>
@@ -152,9 +153,11 @@
           </jenkins.branch.buildstrategies.basic.TagBuildStrategyImpl>
           <jenkins.branch.buildstrategies.basic.ChangeRequestBuildStrategyImpl plugin="basic-branch-build-strategies">
             <ignoreTargetOnlyChanges>true</ignoreTargetOnlyChanges>
+            <ignoreUntrustedChanges>true</ignoreUntrustedChanges>
           </jenkins.branch.buildstrategies.basic.ChangeRequestBuildStrategyImpl>
           <jenkins.branch.buildstrategies.basic.ChangeRequestBuildStrategyImpl plugin="basic-branch-build-strategies">
             <ignoreTargetOnlyChanges>false</ignoreTargetOnlyChanges>
+            <ignoreUntrustedChanges>false</ignoreUntrustedChanges>
           </jenkins.branch.buildstrategies.basic.ChangeRequestBuildStrategyImpl>
           <jenkins.branch.buildstrategies.basic.BranchBuildStrategyImpl plugin="basic-branch-build-strategies"/>
           <jenkins.branch.buildstrategies.basic.SkipInitialBuildOnFirstBranchIndexing plugin="basic-branch-build-strategies"/>

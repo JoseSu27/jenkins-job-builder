@@ -1267,6 +1267,9 @@ def build_strategies(xml_parent, data):
             * **ignore-target-only-changes** (bool) Ignore rebuilding merge
                 branches when only the target branch changed.
                 (optional, default false)
+            * **ignore-untrusted-changes** (bool) Ignore change requests
+                flagged as originating from an untrusted source.
+                (optional, default false)
         * **regular-branches** (bool): Builds regular branches whenever a
             change is detected. (optional, default None)
         * **skip-initial-build** (bool): Skip initial build on first branch
@@ -1365,7 +1368,9 @@ def build_strategies(xml_parent, data):
                 {"plugin": "basic-branch-build-strategies"},
             )
             itoc = cr.get("ignore-target-only-changes", False)
+            iuc = cr.get("ignore-untrusted-changes", False)
             XML.SubElement(cr_elem, "ignoreTargetOnlyChanges").text = str(itoc).lower()
+            XML.SubElement(cr_elem, "ignoreUntrustedChanges").text = str(iuc).lower()
 
         if "named-branches" in bbs_list:
             named_branch_elem = XML.SubElement(
