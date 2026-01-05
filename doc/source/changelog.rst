@@ -1,6 +1,15 @@
 Changelog
 ==========
 
+Release 6.4.4
+-------------
+
+Features added
+~~~~~~~~~~~~~~
+
+* Add support for "ignore-untrusted-changes" in basic branch build strategies
+* Add support for "add-reaction" in GitHub PR comment
+
 Release 6.4.3
 -------------
 
