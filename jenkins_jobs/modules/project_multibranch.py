@@ -1491,10 +1491,13 @@ def property_strategies(xml_parent, data):
                 is compiled as a case-insensitive regular expression, so
                 use ``".*"`` to trigger a build on any comment whatsoever.
                 (optional)
-                If dictionary syntax is used, the option requires 2 fields:
-                ``comment`` with the comment body and ``allow-untrusted-users``
-                (bool) causing the plugin to skip checking if the comment author
-                is a collaborator of the GitHub project.
+                If dictionary syntax is used, the option takes 3 fields:
+                ``comment`` (str, required) with the comment body,
+                ``allow-untrusted-users`` (bool, optional) causing the plugin
+                to skip checking if the comment author is a collaborator of the
+                GitHub project, and ``add-reaction`` (bool, optional) causing
+                the plugin to add a thumbs-up reaction to the comment when it
+                successfully triggers a build.
                 Requires the :jenkins-plugins:`GitHub PR Comment Build Plugin
                 <github-pr-comment-build>`
             * **trigger-build-on-pr-label** (str or dict): PR label to trigger
@@ -1559,11 +1562,13 @@ def property_strategies(xml_parent, data):
                     is compiled as a case-insensitive regular expression, so
                     use ``".*"`` to trigger a build on any comment whatsoever.
                     (optional)
-                    If dictionary syntax is used, the option accepts 2 fields:
-                    ``comment`` (str, required) with the comment body and
-                    ``allow-untrusted-users`` (bool, optional) causing the plugin
-                    to skip checking if the comment author is a collaborator of
-                    the GitHub project.
+                    If dictionary syntax is used, the option takes 3 fields:
+                    ``comment`` (str, required) with the comment body,
+                    ``allow-untrusted-users`` (bool, optional) causing the
+                    plugin to skip checking if the comment author is a
+                    collaborator of the GitHub project, and ``add-reaction``
+                    (bool, optional) causing the plugin to add a thumbs-up
+                    reaction to the comment when it successfully triggers a build.
                     Requires the :jenkins-plugins:`GitHub PR Comment Build Plugin
                     <github-pr-comment-build>`
                 * **trigger-build-on-pr-review** (bool or dict): This property will
@@ -1856,6 +1861,8 @@ def apply_property_strategies(props_elem, props_list):
                 XML.SubElement(tbopc_elem, "commentBody").text = tbopc_val["comment"]
                 if tbopc_val.get("allow-untrusted-users", False):
                     XML.SubElement(tbopc_elem, "allowUntrusted").text = "true"
+                if tbopc_val.get("add-reaction", False):
+                    XML.SubElement(tbopc_elem, "addReaction").text = "true"
             elif isinstance(tbopc_val, str):
                 XML.SubElement(tbopc_elem, "commentBody").text = tbopc_val
             else:
