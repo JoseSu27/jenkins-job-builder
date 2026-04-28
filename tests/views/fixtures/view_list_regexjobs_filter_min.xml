@@ -13,6 +13,10 @@
       <includeExcludeTypeString>includeMatched</includeExcludeTypeString>
       <valueTypeString>NAME</valueTypeString>
       <regex/>
+      <matchName>false</matchName>
+      <matchFullName>false</matchFullName>
+      <matchDisplayName>false</matchDisplayName>
+      <matchFullDisplayName>false</matchFullDisplayName>
     </hudson.views.RegExJobFilter>
   </jobFilters>
   <columns>

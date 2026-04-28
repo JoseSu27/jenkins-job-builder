@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view">
+  <name>Test Dashboard</name>
+  <description/>
+  <filterExecutors>false</filterExecutors>
+  <filterQueue>false</filterQueue>
+  <properties class="hudson.model.View$PropertyList"/>
+  <jobNames>
+    <comparator class="hudson.util.CaseInsensitiveComparator"/>
+  </jobNames>
+  <jobFilters/>
+  <columns>
+    <hudson.views.StatusColumn/>
+    <hudson.views.WeatherColumn/>
+    <hudson.views.JobColumn/>
+    <hudson.views.LastSuccessColumn/>
+    <hudson.views.LastFailureColumn/>
+    <hudson.views.LastDurationColumn/>
+    <hudson.views.BuildButtonColumn/>
+  </columns>
+  <recurse>false</recurse>
+  <useCssStyle>false</useCssStyle>
+  <includeStdJobList>false</includeStdJobList>
+  <hideJenkinsPanels>false</hideJenkinsPanels>
+  <leftPortletWidth>50%</leftPortletWidth>
+  <rightPortletWidth>50%</rightPortletWidth>
+  <leftPortlets/>
+  <rightPortlets/>
+  <topPortlets/>
+  <bottomPortlets/>
+</hudson.plugins.view.dashboard.Dashboard>

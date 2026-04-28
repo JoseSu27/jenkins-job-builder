@@ -59,6 +59,45 @@ To add a new module, define a class that inherits from
    :undoc-members:
    :private-members:
 
+.. _view_module:
+
+View Modules
+------------
+
+Adding a new view type follows the same pattern as adding a job module, but
+with a few view-specific steps that are easy to miss.
+
+1. **Create the module** at ``jenkins_jobs/modules/view_<typename>.py``.
+   Define a class inheriting from :py:class:`jenkins_jobs.modules.base.Base`
+   and implement ``root_xml(self, data)`` to return the root
+   ``xml.etree.ElementTree.Element`` for the view's ``config.xml``.
+
+2. **Register the entry point** in ``setup.cfg`` under ``jenkins_jobs.views``::
+
+       myview=jenkins_jobs.modules.view_myview:MyView
+
+3. **Register all YAML keys in** ``jenkins_jobs/defaults.py``.
+   The ``view_contents_keys`` set is a whitelist of every YAML key that is
+   allowed to pass through to ``root_xml``.  Any key **not** listed there is
+   silently treated as a template variable and will never reach the module,
+   even if the view type handles it correctly.  Add every key your view
+   module reads from ``data`` to this set, grouped under a comment for your
+   view type::
+
+       # MyView.
+       "my-option",
+       "my-portlets",
+
+   Forgetting this step produces no error and the keys are simply dropped. If
+   your view is created but options or nested structures are missing, this is
+   the first place to check.
+
+4. **Add test fixtures** in ``tests/views/fixtures/`` (a minimal YAML/XML
+   pair at minimum) and register the class in ``tests/views/test_views.py``.
+
+5. **Add documentation** at ``doc/source/view_<typename>.rst``.  The
+   ``view_*`` glob in ``definition.rst``'s toctree picks it up automatically.
+
 .. _component:
 
 Components

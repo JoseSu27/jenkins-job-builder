@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view">
+  <name>Test Dashboard</name>
+  <description>A full dashboard view</description>
+  <filterExecutors>false</filterExecutors>
+  <filterQueue>false</filterQueue>
+  <properties class="hudson.model.View$PropertyList"/>
+  <jobNames>
+    <comparator class="hudson.util.CaseInsensitiveComparator"/>
+    <string>job-A</string>
+    <string>job-B</string>
+  </jobNames>
+  <jobFilters/>
+  <columns>
+    <hudson.views.StatusColumn/>
+    <hudson.views.WeatherColumn/>
+    <hudson.views.JobColumn/>
+    <hudson.views.LastSuccessColumn/>
+    <hudson.views.LastFailureColumn/>
+    <hudson.views.LastDurationColumn/>
+    <hudson.views.BuildButtonColumn/>
+  </columns>
+  <includeRegex>.*</includeRegex>
+  <recurse>true</recurse>
+  <useCssStyle>true</useCssStyle>
+  <includeStdJobList>true</includeStdJobList>
+  <hideJenkinsPanels>true</hideJenkinsPanels>
+  <leftPortletWidth>60%</leftPortletWidth>
+  <rightPortletWidth>40%</rightPortletWidth>
+  <leftPortlets>
+    <hudson.plugins.view.dashboard.core.IframePortlet>
+      <name>Iframe Portlet</name>
+      <iframeSource>https://example.com</iframeSource>
+      <effectiveUrl>https://example.com</effectiveUrl>
+      <divStyle>width:100%;height:500px;</divStyle>
+    </hudson.plugins.view.dashboard.core.IframePortlet>
+    <hudson.plugins.view.dashboard.core.ImagePortlet>
+      <name>Image Portlet</name>
+      <url>https://example.com/image.png</url>
+    </hudson.plugins.view.dashboard.core.ImagePortlet>
+  </leftPortlets>
+  <rightPortlets>
+    <hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
+      <name>Jenkins Jobs List</name>
+    </hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
+    <hudson.plugins.view.dashboard.core.JobsPortlet>
+      <name>Jobs Grid</name>
+      <columnCount>3</columnCount>
+      <fillColumnFirst>false</fillColumnFirst>
+    </hudson.plugins.view.dashboard.core.JobsPortlet>
+    <hudson.plugins.view.dashboard.core.UnstableJobsPortlet>
+      <name>Unstable Jobs</name>
+      <showOnlyFailedJobs>false</showOnlyFailedJobs>
+      <recurse>false</recurse>
+    </hudson.plugins.view.dashboard.core.UnstableJobsPortlet>
+    <hudson.plugins.view.dashboard.stats.StatJobs>
+      <name>Job Statistics</name>
+    </hudson.plugins.view.dashboard.stats.StatJobs>
+  </rightPortlets>
+  <topPortlets>
+    <hudson.plugins.view.dashboard.stats.StatBuilds>
+      <name>Build Statistics</name>
+    </hudson.plugins.view.dashboard.stats.StatBuilds>
+    <hudson.plugins.view.dashboard.stats.StatSlaves>
+      <name>Agent Statistics</name>
+    </hudson.plugins.view.dashboard.stats.StatSlaves>
+    <hudson.plugins.view.dashboard.builds.LatestBuilds>
+      <name>Latest Builds</name>
+      <numBuilds>5</numBuilds>
+    </hudson.plugins.view.dashboard.builds.LatestBuilds>
+  </topPortlets>
+  <bottomPortlets>
+    <hudson.plugins.view.dashboard.test.TestStatisticsChart>
+      <name>Test Statistics Chart</name>
+    </hudson.plugins.view.dashboard.test.TestStatisticsChart>
+    <hudson.plugins.view.dashboard.test.TestStatisticsPortlet>
+      <name>Test Statistics Grid</name>
+      <useBackgroundColors>false</useBackgroundColors>
+      <skippedColor>FDB813</skippedColor>
+      <successColor>71E66D</successColor>
+      <failureColor>E86850</failureColor>
+      <hideZeroTestProjects>false</hideZeroTestProjects>
+      <useAlternatePercentagesOnLimits>false</useAlternatePercentagesOnLimits>
+    </hudson.plugins.view.dashboard.test.TestStatisticsPortlet>
+    <hudson.plugins.view.dashboard.test.TestTrendChart>
+      <name>Test Trend Chart</name>
+      <graphWidth>300</graphWidth>
+      <graphHeight>220</graphHeight>
+      <dateRange>365</dateRange>
+      <dateShift>0</dateShift>
+      <displayStatus>ALL</displayStatus>
+    </hudson.plugins.view.dashboard.test.TestTrendChart>
+  </bottomPortlets>
+</hudson.plugins.view.dashboard.Dashboard>
