@@ -957,6 +957,8 @@ def git_scm(xml_parent, data):
     if data.get("build-strategies", None):
         build_strategies(xml_parent, data)
 
+    add_filter_by_name_wildcard_behaviors(traits, data)
+
     # handle the default git extensions like:
     # - clean
     # - shallow-clone

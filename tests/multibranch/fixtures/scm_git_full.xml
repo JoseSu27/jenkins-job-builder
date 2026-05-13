@@ -62,6 +62,10 @@
               <tagIncludes>bar*</tagIncludes>
               <tagExcludes>*qaz</tagExcludes>
             </net.gleske.scmfilter.impl.trait.WildcardSCMOriginFilterTrait>
+            <jenkins.scm.impl.trait.WildcardSCMHeadFilterTrait plugin="scm-api">
+              <includes>*</includes>
+              <excludes>master</excludes>
+            </jenkins.scm.impl.trait.WildcardSCMHeadFilterTrait>
             <jenkins.plugins.git.traits.CleanAfterCheckoutTrait>
               <extension class="hudson.plugins.git.extensions.impl.CleanCheckout"/>
             </jenkins.plugins.git.traits.CleanAfterCheckoutTrait>
