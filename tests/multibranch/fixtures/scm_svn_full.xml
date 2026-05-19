@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject plugin="workflow-multibranch">
+  <properties/>
+  <views>
+    <hudson.model.AllView>
+      <name>All</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <owner class="org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject" reference="../../.."/>
+    </hudson.model.AllView>
+  </views>
+  <viewsTabBar class="hudson.views.DefaultViewsTabBar"/>
+  <folderViews class="jenkins.branch.MultiBranchProjectViewHolder" plugin="branch-api">
+    <owner class="org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject" reference="../.."/>
+  </folderViews>
+  <healthMetrics>
+    <com.cloudbees.hudson.plugins.folder.health.WorstChildHealthMetric plugin="cloudbees-folder">
+      <nonRecursive>false</nonRecursive>
+    </com.cloudbees.hudson.plugins.folder.health.WorstChildHealthMetric>
+  </healthMetrics>
+  <icon class="jenkins.branch.MetadataActionFolderIcon" plugin="branch-api">
+    <owner class="org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject" reference="../.."/>
+  </icon>
+  <orphanedItemStrategy class="com.cloudbees.hudson.plugins.folder.computed.DefaultOrphanedItemStrategy" plugin="cloudbees-folder">
+    <pruneDeadBranches>true</pruneDeadBranches>
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>-1</numToKeep>
+    <abortBuilds>false</abortBuilds>
+  </orphanedItemStrategy>
+  <triggers/>
+  <sources class="jenkins.branch.MultiBranchProject$BranchSourceList" plugin="branch-api">
+    <data>
+      <jenkins.branch.BranchSource>
+        <source class="jenkins.scm.impl.subversion.SubversionSCMSource" plugin="subversion">
+          <id>sn-https://example.com/svnroot/</id>
+          <remoteBase>https://example.com/svnroot/</remoteBase>
+          <credentialsId>secret</credentialsId>
+          <includes>trunk,branches/*</includes>
+          <excludes>branches/hidden/*</excludes>
+          <browser class="hudson.plugins.viewVC.ViewVCRepositoryBrowser" plugin="viewVC">
+            <url>https://viewvc.example.com</url>
+            <location>svnroot</location>
+            <urlFixed>true</urlFixed>
+          </browser>
+          <workspaceUpdater class="hudson.scm.subversion.UpdateWithRevertUpdater"/>
+        </source>
+        <strategy class="jenkins.branch.DefaultBranchPropertyStrategy">
+          <properties class="java.util.Arrays$ArrayList">
+            <a class="jenkins.branch.BranchProperty-array">
+              <jenkins.branch.NoTriggerBranchProperty/>
+              <org.jenkinsci.plugins.workflow.multibranch.DurabilityHintBranchProperty plugin="workflow-multibranch">
+                <hint>MAX_SURVIVABILITY</hint>
+              </org.jenkinsci.plugins.workflow.multibranch.DurabilityHintBranchProperty>
+            </a>
+          </properties>
+        </strategy>
+      </jenkins.branch.BranchSource>
+    </data>
+    <owner class="org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject" reference="../.."/>
+  </sources>
+  <factory class="org.jenkinsci.plugins.workflow.multibranch.WorkflowBranchProjectFactory">
+    <owner class="org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject" reference="../.."/>
+    <scriptPath>Jenkinsfile</scriptPath>
+  </factory>
+</org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject>
