@@ -1,14 +1,30 @@
 Changelog
 ==========
 
+Release 6.5.0
+-------------
+
+Bugs fixed
+~~~~~~~~~~
+
+* setuptools pinned to to <81 for test environments to fix Zuul checks; Fixed doclink checks.
+
+Features added
+~~~~~~~~~~~~~~
+
+* Directory listings is sorted in enum_expanded_paths for deterministic file loading.
+* Added support for Dashboard views.
+* Added support for filter-by-name-wildcard in git_scm.
+* Added svn support for multibranch projects.
+
 Release 6.4.4
 -------------
 
 Features added
 ~~~~~~~~~~~~~~
 
-* Add support for "ignore-untrusted-changes" in basic branch build strategies
-* Add support for "add-reaction" in GitHub PR comment
+* Add support for "ignore-untrusted-changes" in basic branch build strategies.
+* Add support for "add-reaction" in GitHub PR comment.
 
 Release 6.4.3
 -------------
