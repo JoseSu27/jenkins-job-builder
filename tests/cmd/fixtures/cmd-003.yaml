@@ -1,0 +1,15 @@
+- view:
+    name: 'bar001'
+    description: 'My first view'
+
+- view:
+    name: 'bar002'
+    description: 'My second view'
+
+- view:
+    name: 'baz001'
+    description: 'My third view'
+
+- view:
+    name: 'bam001'
+    description: 'My fourth view'
