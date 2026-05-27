@@ -22,6 +22,7 @@ import logging
 import os
 from pprint import pformat
 import re
+import requests
 from six.moves.urllib.parse import quote
 import time
 import xml.etree.ElementTree as XML
@@ -184,7 +185,21 @@ class JenkinsManager(object):
         return self.jobs
 
     def is_managed_job(self, job_name):
-        xml = self.jenkins.get_job_config(job_name)
+        # Under concurrent Jenkins repository scans (triggered by reconfiguring
+        # a multibranch pipeline), ephemeral child jobs (PR branches, etc.)
+        # may be removed. Treat a vanished job as unmanaged rather than raising.
+        try:
+            xml = self.jenkins.get_job_config(job_name)
+        except requests.exceptions.HTTPError as e:
+            status_code = getattr(getattr(e, "response", None), "status_code", None)
+            if status_code == 404:
+                logger.debug(
+                    "Job '%s' vanished before managed-status check; "
+                    "treating as unmanaged",
+                    job_name,
+                )
+                return False
+            raise
         try:
             out = XML.fromstring(xml.encode("utf-8"))
             description = out.find(".//description").text
@@ -200,7 +215,10 @@ class JenkinsManager(object):
         return self._plugins_list
 
     def delete_old_managed_jobs(self, keep=None):
-        jobs = self.get_jobs()
+        # Refresh the job list so we don't act on the startup snapshot.
+        # Multibranch scans triggered by reconfig_job may have created or
+        # deleted child jobs (PR branches, etc.) since we last fetched.
+        jobs = self.get_jobs(cache=False)
         deleted_jobs = 0
         if keep is None:
             keep = []

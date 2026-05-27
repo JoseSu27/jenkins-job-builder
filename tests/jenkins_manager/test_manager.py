@@ -17,6 +17,7 @@
 from unittest import mock
 
 import pytest
+import requests
 
 from jenkins_jobs.config import JJBConfig
 import jenkins_jobs.builder
@@ -101,3 +102,48 @@ def test_get_plugins_info_error(mocker, jjb_config, error_string):
     mocker.patch.object(builder.jenkins, "get_plugins", side_effect=exception)
     plugins_info = builder.get_plugins_info()
     assert [_plugins_info["plugin1"]] == plugins_info
+
+
+def test_delete_old_managed_jobs_with_concurrent_http_404(mocker, jjb_config):
+    jjb_config.builder["plugins_info"] = None
+    builder = jenkins_jobs.builder.JenkinsManager(jjb_config)
+
+    pr_job_name = "my-pipeline/PR-123"
+    patches = mocker.patch.multiple(
+        "jenkins_jobs.builder.JenkinsManager",
+        get_jobs=mock.DEFAULT,
+        is_job=mock.DEFAULT,
+        delete_job=mock.DEFAULT,
+    )
+    patches["get_jobs"].return_value = [
+        {"fullname": "my-pipeline"},
+        {"fullname": pr_job_name},
+    ]
+    patches["is_job"].return_value = True
+
+    # After is_job() but before get_job_config(), the child job (PR, etc.) is
+    # deleted by Jenkins concurrent scanning.
+    def _get_job_config_side_effect(job_name):
+        if job_name == pr_job_name:
+            response = requests.Response()
+            response.status_code = 404
+            response.url = (
+                "https://jenkins.example/job/my-pipeline/" "job/PR-123/config.xml"
+            )
+            raise requests.exceptions.HTTPError(
+                "404 Client Error: Not found for url: " + response.url,
+                response=response,
+            )
+        return (
+            '<?xml version="1.0"?><org.jenkinsci.plugins.workflow.multibranch'
+            ".WorkflowMultiBranchProject>"
+            "<description>Managed by JJB</description>"
+            "</org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject>"
+        )
+
+    mocker.patch.object(
+        builder.jenkins, "get_job_config", side_effect=_get_job_config_side_effect
+    )
+
+    result = builder.delete_old_managed_jobs(keep=["my-pipeline"])
+    assert result == 0
